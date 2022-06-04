@@ -5,22 +5,22 @@ bash ./deps/dep3.sh
 bash ./deps/dep4.sh
 bash ./deps/depsafe.sh
 PATH=$PATH:$HOME/.safe/cli
-echo "           Which testnet do you want to connect to?"
+#echo "           Which testnet do you want to connect to?"
+#echo ""
+#echo "           None of these testnets are guaranteed or even likely to be running at any given time"
+#echo "           Please refer to threads on https://safenetforum.org for current news on live testnets."
+#echo ""
+#echo "               1     sjefolaht"
+#echo "               2     comnet"
+#echo "               3     southsidenet"
+#echo "               4     playground"
+#echo "               5     dreamnet"
+#echo ""
+#echo ""
+#echo "                                    Please select 1, 2, 3, 4 or 5"
+#read SAFENET_CHOICE
 echo ""
-echo "           None of these testnets are guaranteed or even likely to be running at any given time"
-echo "           Please refer to threads on https://safenetforum.org for current news on live testnets."
-echo ""
-echo "               1     sjefolaht"
-echo "               2     comnet"
-echo "               3     southsidenet"
-echo "               4     playground"
-echo "               5     dreamnet"
-echo ""
-echo ""
-echo "                                    Please select 1, 2, 3, 4 or 5"
-read SAFENET_CHOICE
-echo ""
-
+SAFENET_CHOICE=5
 case $SAFENET_CHOICE in
   1)
   SAFENET=sjefolaht
@@ -64,8 +64,8 @@ echo ""
 
 #####################################################################################################################################change for default port
 SAFE_PORT=12000
-read -e -i "$name" -p "              Press Enter to accept the default or edit it here $SAFE_PORT    " input
-SAFE_PORT="${input:-$SAFE_PORT}"
+#read -e -i "$name" -p "              Press Enter to accept the default or edit it here $SAFE_PORT    " input
+#SAFE_PORT="${input:-$SAFE_PORT}"
 echo $SAFE_PORT
 ###########################################################################################################################################################
 

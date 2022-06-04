@@ -22,6 +22,6 @@ nohup RUST_LOG=sn_node=trace,qp2p=info \
     --public-addr "$PUBLIC_IP":$SAFE_PORT \
     --skip-auto-port-forwarding \
     --root-dir "$DIR1" \
-    --log-dir "$DIR1" & disown > nohupOutput.txt 2>&1
+    --log-dir "$DIR1" & disown > nohupOutput.txt
 
 $HOME/.cargo/bin/vdash $HOME/.safe/node/local_node1/sn_node.log

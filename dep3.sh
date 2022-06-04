@@ -1,3 +1,3 @@
 #!/bin/bash
-PATH=$PATH:$HOME/.cargo/bin
+PATH=$PATH:/snap/bin
 rustup toolchain install stable

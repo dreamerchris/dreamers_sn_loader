@@ -1,8 +1,9 @@
 #!/bin/bash
-sh ./deps/dep1_debian.sh
-sh ./deps/dep2.sh
-sh ./deps/dep3.sh
-sh ./deps/dep4.sh
+bash ./deps/dep1_debian.sh
+bash ./deps/dep2.sh
+bash ./deps/dep3.sh
+bash ./deps/dep4.sh
+bash ./deps/depsafe.sh
 
 echo "           Which testnet do you want to connect to?"
 echo ""
@@ -70,8 +71,8 @@ echo $SAFE_PORT
 
 USER=$(whoami)
 
-safe networks add $SAFENET "$CONFIG_URL"
-safe networks switch $SAFENET
+$HOME/.safe/cli/safe networks add $SAFENET "$CONFIG_URL"
+$HOME/.safe/cli/safe networks switch $SAFENET
 
 ACTIVE_IF=$( ( cd /sys/class/net || exit; echo *)|awk '{print $1;}')
 LOCAL_IP=$(echo $(ifdata -pa "$ACTIVE_IF"))

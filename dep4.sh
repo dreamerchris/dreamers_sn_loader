@@ -1,3 +1,3 @@
 #!/bin/bash
-hash -r
+PATH=$PATH:/snap/bin
 cargo install vdash

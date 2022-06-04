@@ -16,11 +16,11 @@ PATH=$PATH:/$HOME/.safe/cli:$HOME/.cargo/bin
 DIR1=$HOME/.safe/node/local_node1
 
 RUST_LOG=sn_node=trace,qp2p=info \
-    ~/.safe/node/sn_node \
+    $HOME/.safe/node/sn_node \
     --local-addr "$LOCAL_IP":$SAFE_PORT \
     --public-addr "$PUBLIC_IP":$SAFE_PORT \
     --skip-auto-port-forwarding \
-    --root-dir '$DIR1' \
-    --log-dir '$DIR1' & disown
+    --root-dir "$DIR1" \
+    --log-dir "$DIR1" & disown
 
 $HOME/.cargo/bin/vdash $HOME/.safe/node/local_node1/sn_node.log

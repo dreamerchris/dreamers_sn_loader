@@ -4,7 +4,7 @@ bash ./deps/dep2.sh
 bash ./deps/dep3.sh
 bash ./deps/dep4.sh
 bash ./deps/depsafe.sh
-
+PATH=$PATH:$HOME/.safe/cli
 echo "           Which testnet do you want to connect to?"
 echo ""
 echo "           None of these testnets are guaranteed or even likely to be running at any given time"
@@ -71,45 +71,45 @@ echo $SAFE_PORT
 
 USER=$(whoami)
 
-$HOME/.safe/cli/safe networks add $SAFENET "$CONFIG_URL"
-$HOME/.safe/cli/safe networks switch $SAFENET
+safe networks add $SAFENET "$CONFIG_URL"
+safe networks switch $SAFENET
 
 ACTIVE_IF=$( ( cd /sys/class/net || exit; echo *)|awk '{print $1;}')
 LOCAL_IP=$(echo $(ifdata -pa "$ACTIVE_IF"))
 PUBLIC_IP=$(echo $(curl -s ifconfig.me))
 
-CURRENT_NODE=1
-CURRENT_ROOT_DIR=$HOME/.safe/node/local_node$CURRENT_NODE/
-CURRENT_LOG_DIR=$HOME/.safe/node/local_node$CURRENT_NODE/
+
+CURRENT_ROOT_DIR=$HOME/.safe/node/local_node1/
+CURRENT_LOG_DIR=$HOME/.safe/node/local_node1/
 mkdir $CURRENT_ROOT_DIR
 
 echo -n "#!/bin/bash
-RUST_LOG=safe_network=trace,qp2p=info \
+RUST_LOG=sn_node=trace,qp2p=info \
         $HOME/.safe/node/sn_node \
         --local-addr '$LOCAL_IP':$SAFE_PORT \
         --public-addr '$PUBLIC_IP':$SAFE_PORT \
         --skip-auto-port-forwarding \
         --root-dir '$CURRENT_ROOT_DIR' \
         --log-dir '$CURRENT_LOG_DIR' & disown" \
-| tee $HOME/.safe/node/start-node$CURRENT_NODE.sh
+| tee $HOME/.safe/node/start-node1.sh
 
-chmod u+x $HOME/.safe/node/start-node$CURRENT_NODE.sh
+chmod u+x $HOME/.safe/node/start-node1.sh
 
 echo -n "[Unit]
-Description=Safe Local Node $CURRENT_NODE
+Description=Safe Local Node 1
 [Service]
 User=$USER
-ExecStart=$HOME/.safe/node/start-node$CURRENT_NODE.sh
+ExecStart=$HOME/.safe/node/start-node1.sh
 Type=forking
 [Install]
 WantedBy=multi-user.target"\
-| sudo tee /etc/systemd/system/sn_node$CURRENT_NODE.service
+| sudo tee /etc/systemd/system/sn_node1.service
 
-sudo systemctl start sn_node$CURRENT_NODE.service
+sudo systemctl start sn_node1.service
 
 
 echo ""
-echo "End of multi sn node joiner script. Starting vdash!"
+echo "End of dreamsnloader script. Starting vdash!"
 echo ""
 
-$HOME/.cargo/bin/vdash $HOME/.safe/node/local_node*/sn_node.log
+$HOME/.cargo/bin/vdash $HOME/.safe/node/local_node1/sn_node.log

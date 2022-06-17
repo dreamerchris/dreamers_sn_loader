@@ -7,5 +7,9 @@ sudo systemctl disable sn_node1.service
 
 sudo systemctl daemon-reload
 sudo systemctl reset-failed
-
-rm -rf ~/.safe/node/local_node1
+NUM=1
+while [ -d $HOME/.safe/node/local_node$NUM ]
+do
+rm -rf ~/.safe/node/local_node$NUM
+NUM=$NUM+1
+done

@@ -1,9 +1,22 @@
 #!/bin/bash
 
+usage()
+{
+  echo "Usage: [-p port]"
+}
+
 ACTIVE_IF=$( ( cd /sys/class/net || exit; echo *)|awk '{print $1;}')
 LOCAL_IP=$(echo $(ifdata -pa "$ACTIVE_IF"))
 PUBLIC_IP=$(echo $(curl -s ifconfig.me))
 SAFE_PORT=12000
+
+while getopts 'apns::?h' c
+do
+  case $c in
+    p) SAFE_PORT=$OPTARG ;;
+    h|?) usage ;;
+  esac
+done
 
 SAFENET=dreamnet
 CONFIG_URL=https://nx23255.your-storageshare.de/s/F7e2QaDLNC2z94z/download/dreamnet.config

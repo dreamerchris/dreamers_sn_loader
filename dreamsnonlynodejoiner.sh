@@ -13,13 +13,18 @@ safe networks switch $SAFENET
 
 PATH=$PATH:/$HOME/.safe/cli:$HOME/.cargo/bin:/usr/local/bin/
 
-DIR1=$HOME/.safe/node/local_node1
-mkdir -p $DIR1
-
-RUST_LOG=sn_node=trace $HOME/.safe/node/sn_node --local-addr "$LOCAL_IP":12000 --public-addr "$PUBLIC_IP":12000 --skip-auto-port-forwarding --root-dir $DIR1 --log-dir $DIR1 & disown
+DIR_NUM=1
+while [ -d $HOME/.safe/node/local_node$DIR_NUM ]
+do
+DIR_NUM=$DIR_NUM+1
+done
+DIR=$HOME/.safe/node/local_node$DIR_NUM
+mkdir -p $DIR
 echo ""
-echo "Launching vdash now!"
+echo "Joining Dreamnet with root and log directory: $DIR"
 echo ""
-sleep 10
-
-$HOME/.cargo/bin/vdash $HOME/.safe/node/local_node1/sn_node.log
+RUST_LOG=sn_node=trace $HOME/.safe/node/sn_node --local-addr "$LOCAL_IP":12000 --public-addr "$PUBLIC_IP":12000 --skip-auto-port-forwarding --root-dir $DIR --log-dir $DIR & disown
+echo ""
+echo "copy and paste the following to run vdash!"
+echo ""
+echo "$HOME/.cargo/bin/vdash $DIR/sn_node.log"

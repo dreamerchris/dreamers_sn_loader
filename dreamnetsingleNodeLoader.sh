@@ -36,7 +36,7 @@ mkdir -p $DIR
 echo ""
 echo "Joining Dreamnet with root and log directory: $DIR"
 echo ""
-RUST_LOG=sn_node=trace $HOME/.safe/node/sn_node --local-addr "$LOCAL_IP":12000 --public-addr "$PUBLIC_IP":12000 --skip-auto-port-forwarding --root-dir $DIR --log-dir $DIR & disown
+RUST_LOG=sn_node=trace $HOME/.safe/node/sn_node --local-addr "$LOCAL_IP":$SAFE_PORT --public-addr "$PUBLIC_IP":$SAFE_PORT --skip-auto-port-forwarding --root-dir $DIR --log-dir $DIR & disown
 echo ""
 echo "copy and paste the following to run vdash!"
 echo ""

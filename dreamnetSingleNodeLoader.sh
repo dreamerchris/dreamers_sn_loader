@@ -26,7 +26,7 @@ safe networks switch $SAFENET
 
 PATH=$PATH:/$HOME/.safe/cli:$HOME/.cargo/bin:/usr/local/bin/
 
-DIR_NUM=1
+DIR_NUM=0
 while [ -d $HOME/.safe/node/local_node$DIR_NUM ]
 do
 DIR_NUM=$DIR_NUM+1
